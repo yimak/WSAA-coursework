@@ -22,20 +22,22 @@ response_dict = response.json()
 #reference: https://www.tutorialspoint.com/python-program-to-extract-a-single-value-from-json-response#:~:text=Using%20APIs%20to%20Extract%20Values%20from%20a%20JSON%20Response
 temperature = response_dict['current']['temperature_2m']
 
-print(f'The actual temperature at 2 meters above ground is: {temperature} °C')
+print(f'The current temperature at 2 meters above ground is: {temperature} °C')
 
 
-# We will follow the same logic the pull out the wind direction
+# for the wind direction, we will follow the same logic as we did with temperature but we will create a new API
+# click on documentation -> go to 'Current Weather' -> search 'Coordinates' -> select 'Wind diretion (10m)' -> click on 'Search' -> look for 'API URL' and copy link
+# https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=wind_direction_10m&hourly=temperature_2m 
 
-response_API = requests.get('https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m')
+response_API = requests.get('https://api.open-meteo.com/v1/forecast?latitude=53.2905&longitude=-6.1949&current=wind_direction_10m')
 
-response = requests.get('https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m')
+response = requests.get('https://api.open-meteo.com/v1/forecast?latitude=53.2905&longitude=-6.1949&current=wind_direction_10m')
 
 response_dict1 = response.json()
 
-wind_speed = response_dict1['current']['wind_speed_10m']
+wind_speed = response_dict1['current']['wind_direction_10m']
 
-print(f'The actual temperature at 10 meters above ground is: {wind_speed} km/h')
+print(f'The current wind speed at 10 meters above ground is: {wind_speed} km/h')
 
 
 
